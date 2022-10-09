@@ -6,6 +6,7 @@ module.exports = {
       fontFamily: {
         pop: ["Poppins", "sans-serif"],
         nun: ["Nunito", "sans-serif"],
+        open: ["Open Sans", "sans-serif"],
       },
       colors: {
         primary: "#1b2a44cf",
