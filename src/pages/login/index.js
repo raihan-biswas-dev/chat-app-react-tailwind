@@ -1,41 +1,41 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebookSquare } from "react-icons/fa";
 
-function Registration() {
+function Login() {
   return (
     <div className="flex">
       <div className="w-1/2 flex flex-col items-end pr-[69px]  justify-center">
         <div className="w-[497px]">
           <h2 className="font-bold text-[34px] text-nun text-primary">
-            Get started with easily register
+            Login to your account!
           </h2>
-          <p className="font-normal	text-xl text-nun self-center mt-2.5">
-            Free register and you can enjoy it
-          </p>
+          <div className="flex gap-x-2 mt-8">
+            <button className="py-4 px-[40px] border-[1px] rounded-lg shadow-lg">
+              <FcGoogle className="inline-block text-[20px]" /> Login with
+              Google
+            </button>
+            <button className="py-4 px-[40px] border-[1px]  rounded-lg shadow-lg">
+              <FaFacebookSquare className="inline-block text-[20px]" /> Login
+              with Facebook
+            </button>
+          </div>
           <div className="relative">
             <input
-              className="border border-solid border-black w-full rounded-lg	px-14	py-6 mt-8 outline-0"
+              className="border-b border-solid border-black w-full	py-6 mt-8 outline-0"
               type="email"
             />
-            <p className="text-nun font-semibold text-3.5 absolute top-[19px] left-9 bg-white px-2.5">
+            <p className="text-nun font-semibold text-3.5 absolute top-[19px] bg-white">
               Email Addres
             </p>
           </div>
           <div className="relative">
             <input
-              className="border border-solid border-black w-full rounded-lg	pl-14	py-6 mt-8 outline-0"
-              type="text"
-            />
-            <p className="text-nun font-semibold text-3.5 absolute top-[19px] left-9 bg-white px-2.5">
-              Full name
-            </p>
-          </div>
-          <div className="relative">
-            <input
-              className="border border-solid border-black w-full rounded-lg	pl-14	py-6 mt-8 outline-0"
+              className="border-b border-solid border-black w-full	py-6 mt-8 outline-0"
               type="password"
             />
-            <p className="text-nun font-semibold text-3.5 absolute top-[19px] left-9 bg-white px-2.5">
+            <p className="text-nun font-semibold text-3.5 absolute top-[19px] bg-white">
               Password
             </p>
           </div>
@@ -43,12 +43,12 @@ function Registration() {
             class="rounded-full w-full 
           text-center bg-primary py-5 px-36 text-white font-nun font-semibold text-xl mt-8"
           >
-            Sign Up
+            Sign In
           </button>
           <p className="font-open font-normal	text-primary mt-8 w-full text-center">
-            Already have an account ?
-            <Link className="font-bold font-nun text-bold ml-2" to="/login">
-              Sign In
+            Don’t have an account ?
+            <Link className="font-bold font-nun text-bold ml-2" to="/register">
+              Sign Up
             </Link>
           </p>
         </div>
@@ -74,4 +74,4 @@ function Registration() {
   );
 }
 
-export default Registration;
+export default Login;
