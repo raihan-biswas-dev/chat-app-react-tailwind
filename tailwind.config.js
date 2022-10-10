@@ -12,6 +12,9 @@ module.exports = {
         primary: "#1b2a44cf",
         yell: "#ffea00",
       },
+      screens: {
+        sm: "375px",
+      },
     },
   },
   plugins: [],
