@@ -12,10 +12,13 @@ module.exports = {
         primary: "#1b2a44cf",
         yell: "#ffea00",
       },
-      screens: {
-        sm: "375px",
-      },
     },
+  },
+
+  screens: {
+    sm: "375px",
+    sml: "768px",
+    mdl: "1024px",
   },
   plugins: [],
 };
