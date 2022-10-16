@@ -10,20 +10,20 @@ import BlockedUser from "./../../components/BlockedUser";
 
 function Home() {
   return (
-    <div className="flex justify-between">
-      <div className="max-w-[186px]">
+    <div className="md:flex justify-between">
+      <div className="md:w-[186px]">
         <Sidebar active="home" />
       </div>
-      <div className="max-w-[427px]">
+      <div className="w-[427px]">
         <Search />
         <Group />
         <FriendReq />
       </div>
-      <div className="max-w-[344px]">
+      <div className="w-[344px]">
         <Friends />
         <MyGroups />
       </div>
-      <div className="max-w-[344px]">
+      <div className="w-[344px]">
         <UserList />
         <BlockedUser />
       </div>
