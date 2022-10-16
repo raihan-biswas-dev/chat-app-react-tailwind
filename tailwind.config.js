@@ -11,6 +11,7 @@ module.exports = {
       colors: {
         primary: "#1b2a44cf",
         yell: "#ffea00",
+        para: "rgba(77, 77, 77, 0.75)",
       },
     },
   },
