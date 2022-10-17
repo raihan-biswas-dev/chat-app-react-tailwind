@@ -6,47 +6,89 @@ import { BiExit } from "react-icons/bi";
 
 function Sidebar({ active }) {
   return (
-    <div className="w-full flex flex-col justify-center bg-primary h-screen px-10 py-8">
-      <picture>
-        <img
-          src="images/profile-1.png"
-          alt="profile-1"
-          loading="lazy"
-          className="h-[100px] w-[100px] rounded"
-        />
-      </picture>
-      <div className="flex flex-col items-center pt-8 gap-y-10">
-        <div
-          className={`${
-            active == "home" &&
-            "relative z-10 after:absolute after:top-0 after:left-[-60%] after:bg-white after:h-full after:overflow-x-hidden after:w-[242%] after:content[''] after:z-[-1] after:rounded-l-lg p-4 before:absolute before:top-0 before:right-[-56px] before:bg-primary before:w-3 before:h-[68px] before:rounded-l-lg before:drop-shadow-2xl"
-          }`}
-        >
-          <AiOutlineHome
-            className={`${
-              active == "home" ? "text-4xl text-primary" : "text-4xl text-white"
-            }`}
+    <div className="w-full flex xl:flex-col justify-center mdl:w-full xl:justify-start items-center bg-[#414D62] xl:bg-primary xl:h-full px-10 xl:py-8 fixed bottom-0 xl:static z-10">
+      <div className="flex xl:flex-col items-center  xl:items-start p-2.5 xl:p-0">
+        <picture>
+          <img
+            src="images/profile-1.png"
+            alt="profile-1"
+            loading="lazy"
+            className="h-[40px] w-[40px] xl:h-[100px] xl:w-[100px] rounded"
           />
-        </div>
-
-        <div
-          className={`${
-            active == "message" &&
-            "relative z-10 after:absolute after:top-0 after:left-[-60%] after:bg-white after:h-full after:overflow-x-hidden after:w-[242%] after:content[''] after:z-[-1] after:rounded-l-lg p-4 before:absolute before:top-0 before:right-[-56px] before:bg-primary before:w-3 before:h-[68px] before:rounded-l-lg before:drop-shadow-2xl"
-          }`}
-        >
-          <AiOutlineMessage
+        </picture>
+        <div className="flex xl:flex-col items-center xl:pt-8 xl:gap-y-10 gap-x-4 xl:gap-x-1 ">
+          <div
             className={`${
-              active == "message"
-                ? "text-4xl text-primary"
-                : "text-4xl text-white"
+              active == "home" &&
+              "relative z-10 after:absolute after:top-0 after:left-[-60%] xl:after:bg-white after:h-full after:overflow-x-hidden after:w-[242%] after:content[''] after:z-[-1] after:rounded-l-xl p-4 before:absolute before:top-0 before:right-[-56px] xl:before:bg-primary before:w-3 before:h-[68px] before:rounded-l-xl before:drop-shadow-2xl"
             }`}
-          />
-        </div>
+          >
+            <AiOutlineHome
+              className={`${
+                active == "home"
+                  ? "text-2xl xl:text-4xl xl:text-primary"
+                  : "text-2xl xl:text-4xl text-white"
+              }`}
+            />
+          </div>
 
-        <IoMdNotificationsOutline className="text-4xl text-white " />
-        <FiSettings className="text-4xl text-white " />
-        <BiExit className="text-4xl text-white mt-5" />
+          <div
+            className={`${
+              active == "message" &&
+              "relative z-10 after:absolute after:top-0 after:left-[-60%] after:bg-white after:h-full after:overflow-x-hidden after:w-[242%] after:content[''] after:z-[-1] after:rounded-l-xl p-4 before:absolute before:top-0 before:right-[-56px] before:bg-primary before:w-3 before:h-[68px] before:rounded-l-xl before:drop-shadow-2xl"
+            }`}
+          >
+            <AiOutlineMessage
+              className={`${
+                active == "message"
+                  ? "text-2xl xl:text-4xl text-primary"
+                  : "text-2xl xl:text-4xl text-white"
+              }`}
+            />
+          </div>
+          <div
+            className={`${
+              active == "message" &&
+              "relative z-10 after:absolute after:top-0 after:left-[-60%] after:bg-white after:h-full after:overflow-x-hidden after:w-[242%] after:content[''] after:z-[-1] after:rounded-l-xl p-4 before:absolute before:top-0 before:right-[-56px] before:bg-primary before:w-3 before:h-[68px] before:rounded-l-xl before:drop-shadow-2xl"
+            }`}
+          >
+            <IoMdNotificationsOutline
+              className={`${
+                active == "message"
+                  ? "text-2xl xl:text-4xl  text-primary"
+                  : "text-2xl xl:text-4xl text-white"
+              }`}
+            />
+          </div>
+          <div
+            className={`${
+              active == "message" &&
+              "relative z-10 after:absolute after:top-0 after:left-[-60%] after:bg-white after:h-full after:overflow-x-hidden after:w-[242%] after:content[''] after:z-[-1] after:rounded-l-xl p-4 before:absolute before:top-0 before:right-[-56px] before:bg-primary before:w-3 before:h-[68px] before:rounded-l-xl before:drop-shadow-2xl"
+            }`}
+          >
+            <FiSettings
+              className={`${
+                active == "message"
+                  ? "text-2xl xl:text-4xl text-primary"
+                  : "text-2xl xl:text-4xl text-white"
+              }`}
+            />
+          </div>
+          <div
+            className={`${
+              active == "message" &&
+              "relative z-10 after:absolute after:top-0 after:left-[-60%] after:bg-white after:h-full after:overflow-x-hidden after:w-[242%] after:content[''] after:z-[-1] after:rounded-l-xl p-4 before:absolute before:top-0 before:right-[-56px] before:bg-primary before:w-3 before:h-[68px] before:rounded-l-xl before:drop-shadow-2xl"
+            }`}
+          >
+            <BiExit
+              className={`${
+                active == "message"
+                  ? "text-2xl xl:text-4xl text-primary"
+                  : "text-2xl xl:text-4xl text-white"
+              }`}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ function Group() {
           alt=""
           className="w-[70px] h-[70px] rounded"
         />
-        <div className="">
+        <div className="ml-4 xl:ml-0">
           <h3 className="font-pop font-semibold text-lg text-primary">
             MERN Stack
           </h3>
@@ -32,7 +32,7 @@ function Group() {
           alt=""
           className="w-[70px] h-[70px] rounded"
         />
-        <div className="">
+        <div className="ml-4 xl:ml-0">
           <h3 className="font-pop font-semibold text-lg text-primary">
             MERN Stack
           </h3>
@@ -52,7 +52,7 @@ function Group() {
           alt=""
           className="w-[70px] h-[70px] rounded"
         />
-        <div className="">
+        <div className="ml-4 xl:ml-0">
           <h3 className="font-pop font-semibold text-lg text-primary">
             MERN Stack
           </h3>
@@ -72,7 +72,7 @@ function Group() {
           alt=""
           className="w-[70px] h-[70px] rounded"
         />
-        <div className="">
+        <div className="ml-4 xl:ml-0">
           <h3 className="font-pop font-semibold text-lg text-primary">
             MERN Stack
           </h3>

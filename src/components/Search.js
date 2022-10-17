@@ -8,7 +8,7 @@ function Search() {
       <div className="relative">
         <input
           type="text"
-          className="p-2.5 w-[427px] rounded-lg drop-shadow-md outline-none pl-10"
+          className="p-2.5 w-full xl:w-[427px] rounded-lg drop-shadow-md outline-none pl-10"
           placeholder="search"
         />
         <FiSearch className="absolute left-[15px] top-[17px] text-primary" />
