@@ -1,8 +1,18 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { ColorRing } from "react-loader-spinner";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  updateProfile,
+} from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 function Registration() {
+  const auth = getAuth();
+  let navigate = useNavigate();
+
   let [email, setEmail] = useState("");
   let [fullName, setFullName] = useState("");
   let [password, setPassword] = useState("");
@@ -11,7 +21,11 @@ function Registration() {
   let [fullNameErr, setFullNameErr] = useState("");
   let [passwordErr, setPasswordErr] = useState("");
 
+  let [fireErr, setFireErr] = useState("");
+  let [success, setSuccess] = useState("");
+
   let [show, setShow] = useState(false);
+  let [loading, setLoading] = useState(false);
 
   let handleEmail = (e) => {
     setEmail(e.target.value);
@@ -58,6 +72,46 @@ function Registration() {
         setPasswordErr("Password be eight characters or longer ");
       }
     }
+
+    let passRegx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    let emailRegx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (
+      email &&
+      password &&
+      fullName &&
+      emailRegx.test(email) &&
+      passRegx.test(password)
+    ) {
+      setLoading(true);
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((user) => {
+          updateProfile(auth.currentUser, {
+            displayName: fullName,
+            photoURL: "images/profile.png",
+          })
+            .then(() => {
+              console.log(user);
+              sendEmailVerification(auth.currentUser).then(() => {
+                setLoading(false);
+                setSuccess("Registration Successful, please verify your email");
+              });
+              setTimeout(() => {
+                navigate("/login");
+              }, 5000);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          if (errorCode.includes("auth/email-already-in-use")) {
+            setFireErr("email already in use");
+            setLoading(false);
+          }
+        });
+    }
   };
 
   let handlePasswordShow = () => {
@@ -74,6 +128,11 @@ function Registration() {
           <p className="font-normal text-[18px]	sml:text-xl text-nun self-center mt-2.5">
             Free register and you can enjoy Chaty
           </p>
+          {fireErr && (
+            <p className="text-nun font-semibold text-3.5 text-[red]">
+              {fireErr}
+            </p>
+          )}
           <div className="relative">
             <input
               className="border border-solid border-black w-full rounded-lg	px-[38px] py-4	sml:py-6 mt-8 outline-0"
@@ -86,6 +145,11 @@ function Registration() {
             {emailErr && (
               <p className="text-nun font-semibold text-3.5 text-[red]">
                 {emailErr}
+              </p>
+            )}
+            {success && (
+              <p className="text-nun font-semibold text-3.5 text-[green]">
+                {success}
               </p>
             )}
           </div>
@@ -132,13 +196,28 @@ function Registration() {
               </p>
             )}
           </div>
-          <button
-            class="rounded-full w-full 
+          {loading ? (
+            <div className="flex justify-center items-center">
+              <ColorRing
+                visible={true}
+                height="80"
+                width="80"
+                ariaLabel="blocks-loading"
+                wrapperStyle={{}}
+                wrapperClass="blocks-wrapper"
+                colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+              />
+            </div>
+          ) : (
+            <button
+              class="rounded-full w-full 
           text-center bg-primary py-3.5 sml:py-5 px- sml:px-36 text-white font-nun font-semibold text-xl mt-8"
-            onClick={handleSubmit}
-          >
-            Sign Up
-          </button>
+              onClick={handleSubmit}
+            >
+              Sign Up
+            </button>
+          )}
+
           <p className="font-open font-normal	text-primary mt-8 w-full text-center">
             Already have an account ?
             <Link className="font-bold font-nun text-bold ml-2" to="/login">

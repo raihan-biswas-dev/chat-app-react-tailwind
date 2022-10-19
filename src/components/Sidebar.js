@@ -48,13 +48,13 @@ function Sidebar({ active }) {
           </div>
           <div
             className={`${
-              active == "message" &&
+              active == "notification" &&
               "relative z-10 after:absolute after:top-0 after:left-[-60%] after:bg-white after:h-full after:overflow-x-hidden after:w-[242%] after:content[''] after:z-[-1] after:rounded-l-xl p-4 before:absolute before:top-0 before:right-[-56px] before:bg-primary before:w-3 before:h-[68px] before:rounded-l-xl before:drop-shadow-2xl"
             }`}
           >
             <IoMdNotificationsOutline
               className={`${
-                active == "message"
+                active == "notification"
                   ? "text-2xl xl:text-4xl  text-primary"
                   : "text-2xl xl:text-4xl text-white"
               }`}
@@ -62,13 +62,13 @@ function Sidebar({ active }) {
           </div>
           <div
             className={`${
-              active == "message" &&
+              active == "settings" &&
               "relative z-10 after:absolute after:top-0 after:left-[-60%] after:bg-white after:h-full after:overflow-x-hidden after:w-[242%] after:content[''] after:z-[-1] after:rounded-l-xl p-4 before:absolute before:top-0 before:right-[-56px] before:bg-primary before:w-3 before:h-[68px] before:rounded-l-xl before:drop-shadow-2xl"
             }`}
           >
             <FiSettings
               className={`${
-                active == "message"
+                active == "settings"
                   ? "text-2xl xl:text-4xl text-primary"
                   : "text-2xl xl:text-4xl text-white"
               }`}
@@ -76,13 +76,13 @@ function Sidebar({ active }) {
           </div>
           <div
             className={`${
-              active == "message" &&
+              active == "exit" &&
               "relative z-10 after:absolute after:top-0 after:left-[-60%] after:bg-white after:h-full after:overflow-x-hidden after:w-[242%] after:content[''] after:z-[-1] after:rounded-l-xl p-4 before:absolute before:top-0 before:right-[-56px] before:bg-primary before:w-3 before:h-[68px] before:rounded-l-xl before:drop-shadow-2xl"
             }`}
           >
             <BiExit
               className={`${
-                active == "message"
+                active == "exit"
                   ? "text-2xl xl:text-4xl text-primary"
                   : "text-2xl xl:text-4xl text-white"
               }`}

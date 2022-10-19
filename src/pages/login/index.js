@@ -1,16 +1,25 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { ColorRing } from "react-loader-spinner";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookSquare } from "react-icons/fa";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 function Login() {
+  const auth = getAuth();
+  let navigate = useNavigate();
+
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
 
   let [emailErr, setEmailErr] = useState("");
   let [passwordErr, setPasswordErr] = useState("");
   let [passwordLengthErr, setPasswordLengthErr] = useState("");
+  let [success, setSuccess] = useState("");
+  let [loading, setLoading] = useState(false);
+
+  let [error, setError] = useState("");
 
   let [show, setShow] = useState(false);
 
@@ -36,6 +45,24 @@ function Login() {
     } else {
       setPasswordLengthErr("");
     }
+
+    setLoading(true);
+    signInWithEmailAndPassword(auth, email, password).then((user) => {
+      setLoading(false);
+      setSuccess("Login Successful");
+    });
+    setTimeout(() => {
+      navigate("/");
+    }, 2000).catch((error) => {
+      const errorCode = error.code;
+      console.log(errorCode);
+      if (errorCode.includes("auth/wrong-password")) {
+        setError("Password Doesn't match");
+      }
+      if (errorCode.includes("auth/user-not-found")) {
+        setError("Email doesn't match");
+      }
+    });
   };
 
   let handlePasswordShow = () => {
@@ -64,6 +91,11 @@ function Login() {
 
       <div className="md:w-1/2 flex flex-col  md:items-end sml:pr-0 md:pr-[69px] p-8  justify-center md:order-1 order-2 sml:order-1">
         <div className="md:w-[100%]">
+          {error && (
+            <p className="text-nun font-semibold text-3.5 text-[red]">
+              {error}
+            </p>
+          )}
           <h2 className="font-bold text-3xl md:text-[34px] text-nun text-primary">
             Login to your account!
           </h2>
@@ -121,13 +153,29 @@ function Login() {
               </p>
             )}
           </div>
-          <button
-            className="rounded-full w-full 
+
+          {loading ? (
+            <div className="flex justify-center items-center">
+              <ColorRing
+                visible={true}
+                height="80"
+                width="80"
+                ariaLabel="blocks-loading"
+                wrapperStyle={{}}
+                wrapperClass="blocks-wrapper"
+                colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+              />
+            </div>
+          ) : (
+            <button
+              className="rounded-full w-full 
           text-center bg-primary py-5 md:px-36 text-white font-nun font-semibold text-xl mt-8"
-            onClick={handleSubmit}
-          >
-            Sign In
-          </button>
+              onClick={handleSubmit}
+            >
+              Sign In
+            </button>
+          )}
+
           <p className="font-open font-normal	text-primary mt-8 w-full text-center">
             Don’t have an account ?
             <Link className="font-bold font-nun text-bold ml-2" to="/register">
