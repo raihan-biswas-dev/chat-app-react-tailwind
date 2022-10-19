@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { ColorRing } from "react-loader-spinner";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookSquare } from "react-icons/fa";
@@ -8,7 +8,11 @@ import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 function Login() {
   const auth = getAuth();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+
+  // ======================
+  let [loading, setLoading] = useState(false);
+  let [success, setSuccess] = useState("");
 
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
@@ -16,8 +20,6 @@ function Login() {
   let [emailErr, setEmailErr] = useState("");
   let [passwordErr, setPasswordErr] = useState("");
   let [passwordLengthErr, setPasswordLengthErr] = useState("");
-  let [success, setSuccess] = useState("");
-  let [loading, setLoading] = useState(false);
 
   let [error, setError] = useState("");
 
@@ -47,22 +49,26 @@ function Login() {
     }
 
     setLoading(true);
-    signInWithEmailAndPassword(auth, email, password).then((user) => {
-      setLoading(false);
-      setSuccess("Login Successful");
-    });
-    setTimeout(() => {
-      navigate("/");
-    }, 2000).catch((error) => {
-      const errorCode = error.code;
-      console.log(errorCode);
-      if (errorCode.includes("auth/wrong-password")) {
-        setError("Password Doesn't match");
-      }
-      if (errorCode.includes("auth/user-not-found")) {
-        setError("Email doesn't match");
-      }
-    });
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((user) => {
+        setSuccess("login Successful");
+        setLoading(false);
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      })
+      .catch((error) => {
+        setLoading(false);
+        const errorCode = error.code;
+        console.log(errorCode);
+        if (errorCode.includes("auth/wrong-password")) {
+          setError("Password Doesn't match");
+        }
+        if (errorCode.includes("auth/user-not-found")) {
+          setError("Email doesn't match");
+        }
+      });
   };
 
   let handlePasswordShow = () => {
@@ -94,6 +100,12 @@ function Login() {
           {error && (
             <p className="text-nun font-semibold text-3.5 text-[red]">
               {error}
+            </p>
+          )}
+
+          {success && (
+            <p className="text-nun font-semibold text-3.5 text-[green]">
+              {success}
             </p>
           )}
           <h2 className="font-bold text-3xl md:text-[34px] text-nun text-primary">
