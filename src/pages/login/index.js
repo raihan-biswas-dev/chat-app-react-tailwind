@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ColorRing } from "react-loader-spinner";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { ToastContainer, toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookSquare } from "react-icons/fa";
@@ -49,14 +50,14 @@ function Login() {
     }
 
     setLoading(true);
-
+    toast.success("login Successful");
     signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
         setSuccess("login Successful");
         setLoading(false);
-        setTimeout(() => {
-          navigate("/");
-        }, 2000);
+        // setTimeout(() => {
+        //   navigate("/");
+        // }, 2000);
       })
       .catch((error) => {
         setLoading(false);
@@ -77,6 +78,7 @@ function Login() {
 
   return (
     <div className="md:flex p-2.5 md:p-0">
+      <ToastContainer theme="light" />
       <div className=" md:w-1/2 w-full bg-primary md:order-1 sml:order-2">
         <div className="flex flex-col md:h-screen justify-center items-center sml:h-screen py-2 sml:py-8">
           <picture className="hidden md:block sml:block">
