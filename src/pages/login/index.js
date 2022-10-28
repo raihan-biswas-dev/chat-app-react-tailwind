@@ -1,14 +1,25 @@
 import React, { useState } from "react";
 import { ColorRing } from "react-loader-spinner";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { AiOutlineClose } from "react-icons/ai";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookSquare } from "react-icons/fa";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import ForgotPassword from "./../forgotPassword/index";
 
 function Login() {
   const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+  const Fbprovider = new FacebookAuthProvider();
   const navigate = useNavigate();
 
   // ======================
@@ -25,6 +36,8 @@ function Login() {
   let [error, setError] = useState("");
 
   let [show, setShow] = useState(false);
+  let [showForgotPassPopUp, setShowForgotPassPopUp] = useState(false);
+  let [ForgotPassword, setShowForgotPass] = useState("");
 
   let handleEmail = (e) => {
     setEmail(e.target.value);
@@ -78,6 +91,32 @@ function Login() {
     setShow(!show);
   };
 
+  let handleGoogleLogin = () => {
+    signInWithPopup(auth, provider).then(() => {
+      navigate("/");
+    });
+  };
+
+  let handleFacebookLogin = () => {
+    signInWithPopup(auth, Fbprovider).then(() => {
+      navigate("/");
+    });
+  };
+
+  let handleForgotPassPopUp = () => {
+    setShowForgotPassPopUp(!showForgotPassPopUp);
+  };
+
+  let handleClosePopUp = () => {
+    setShowForgotPassPopUp(false);
+  };
+
+  let handleForgotPassword = () => {
+    sendPasswordResetEmail(auth, ForgotPassword).then(() => {
+      toast.success("Check your email to change password");
+    });
+  };
+
   return (
     <div className="md:flex p-2.5 md:p-0">
       <ToastContainer theme="dark" position="top-center" />
@@ -116,11 +155,17 @@ function Login() {
             Login to your account!
           </h2>
           <div className="md:flex-row  flex flex-col  md:gap-x-2 mt-8 mdl:!flex-row">
-            <button className="py-4 mb-5 md:mb-0 px-[40px] border-[1px] rounded-lg shadow-lg">
-              <FcGoogle className="inline-block text-[20px]" /> Login with
-              Google
+            <button
+              className="py-4 mb-5 md:mb-0 px-[40px] border-[1px] rounded-lg shadow-lg"
+              onClick={handleGoogleLogin}
+            >
+              <FcGoogle className="inline-block text-[20px]" />
+              Login with Google
             </button>
-            <button className="py-4 md:px-[40px] border-[1px]  rounded-lg shadow-lg">
+            <button
+              className="py-4 md:px-[40px] border-[1px]  rounded-lg shadow-lg"
+              onClick={handleFacebookLogin}
+            >
               <FaFacebookSquare className="inline-block text-[20px]" /> Login
               with Facebook
             </button>
@@ -198,8 +243,45 @@ function Login() {
               Sign Up
             </Link>
           </p>
+          <p className="font-open font-normal	text-primary mt-8 w-full text-center">
+            <button
+              onClick={handleForgotPassPopUp}
+              className="font-bold font-nun text-bold ml-2"
+              to="/forgotpassword"
+            >
+              Forgot password?
+            </button>
+          </p>
         </div>
       </div>
+      {/* Forgot Password PopUp */}
+
+      {showForgotPassPopUp && (
+        <div className="w-full h-screen bg-primary flex justify-center items-center fixed">
+          <div className="p-12 bg-white rounded font-pop font-bold relative">
+            <AiOutlineClose
+              className="absolute text-4xl right-2 top-2 text-[#ff5733] cursor-pointer"
+              onClick={handleClosePopUp}
+            />
+            <h1 className="text-primary font-bold text-2xl">Forgot Password</h1>
+            <div className="relative">
+              <input
+                className="border border-solid border-black w-full rounded-lg font-normal	px-[38px] py-2	sml:py-6 mt-8 outline-0"
+                type="email"
+                placeholder="Enter your mail"
+                onChange={(e) => setShowForgotPass(e.target.value)}
+              />
+            </div>
+            <button
+              onClick={handleForgotPassword}
+              className="rounded-full w-full 
+          text-center bg-primary py-2 md:px-4 text-white font-nun font-normal text-base mt-8"
+            >
+              Change Password
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

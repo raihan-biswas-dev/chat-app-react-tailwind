@@ -6,6 +6,7 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
   updateProfile,
+  signInWithPopup,
 } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
@@ -145,7 +146,7 @@ function Registration() {
               onChange={handleEmail}
             />
             <p className="text-nun font-semibold text-3.5 absolute top-[19px] left-9 bg-white px-2.5">
-              Email Addres
+              Email Address
             </p>
             {emailErr && (
               <p className="text-nun font-semibold text-3.5 text-[red]">
