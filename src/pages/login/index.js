@@ -50,24 +50,26 @@ function Login() {
     }
 
     setLoading(true);
-    toast.success("login Successful");
     signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
-        setSuccess("login Successful");
+        // setSuccess("login Successful");
+        toast.success("login Successful");
         setLoading(false);
-        // setTimeout(() => {
-        //   navigate("/");
-        // }, 2000);
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
       })
       .catch((error) => {
         setLoading(false);
         const errorCode = error.code;
         console.log(errorCode);
         if (errorCode.includes("auth/wrong-password")) {
-          setError("Password Doesn't match");
+          // setError("Password Doesn't match");
+          toast.error("Password Doesn't match");
         }
         if (errorCode.includes("auth/user-not-found")) {
-          setError("Email doesn't match");
+          // setError("Email doesn't match");
+          toast.error("Email doesn't match");
         }
       });
   };
@@ -78,7 +80,7 @@ function Login() {
 
   return (
     <div className="md:flex p-2.5 md:p-0">
-      <ToastContainer theme="light" />
+      <ToastContainer theme="dark" position="top-center" />
       <div className=" md:w-1/2 w-full bg-primary md:order-1 sml:order-2">
         <div className="flex flex-col md:h-screen justify-center items-center sml:h-screen py-2 sml:py-8">
           <picture className="hidden md:block sml:block">
@@ -99,17 +101,17 @@ function Login() {
 
       <div className="md:w-1/2 flex flex-col  md:items-end sml:pr-0 md:pr-[69px] p-8  justify-center md:order-1 order-2 sml:order-1">
         <div className="md:w-[100%]">
-          {error && (
+          {/* {error && (
             <p className="text-nun font-semibold text-3.5 text-[red]">
               {error}
             </p>
-          )}
+          )} */}
 
-          {success && (
+          {/* {success && (
             <p className="text-nun font-semibold text-3.5 text-[green]">
               {success}
             </p>
-          )}
+          )} */}
           <h2 className="font-bold text-3xl md:text-[34px] text-nun text-primary">
             Login to your account!
           </h2>

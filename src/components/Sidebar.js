@@ -19,13 +19,13 @@ function Sidebar({ active }) {
         <div className="flex xl:flex-col items-center xl:pt-8 xl:gap-y-10 gap-x-4 xl:gap-x-1 ">
           <div
             className={`${
-              active == "home" &&
+              active === "home" &&
               "relative z-10 after:absolute after:top-0 after:left-[-60%] xl:after:bg-white after:h-full after:overflow-x-hidden after:w-[242%] after:content[''] after:z-[-1] after:rounded-l-xl p-4 before:absolute before:top-0 before:right-[-56px] xl:before:bg-primary before:w-3 before:h-[68px] before:rounded-l-xl before:drop-shadow-2xl"
             }`}
           >
             <AiOutlineHome
               className={`${
-                active == "home"
+                active === "home"
                   ? "text-2xl xl:text-4xl xl:text-primary"
                   : "text-2xl xl:text-4xl text-white"
               }`}
@@ -34,13 +34,13 @@ function Sidebar({ active }) {
 
           <div
             className={`${
-              active == "message" &&
+              active === "message" &&
               "relative z-10 after:absolute after:top-0 after:left-[-60%] after:bg-white after:h-full after:overflow-x-hidden after:w-[242%] after:content[''] after:z-[-1] after:rounded-l-xl p-4 before:absolute before:top-0 before:right-[-56px] before:bg-primary before:w-3 before:h-[68px] before:rounded-l-xl before:drop-shadow-2xl"
             }`}
           >
             <AiOutlineMessage
               className={`${
-                active == "message"
+                active === "message"
                   ? "text-2xl xl:text-4xl text-primary"
                   : "text-2xl xl:text-4xl text-white"
               }`}
@@ -54,7 +54,7 @@ function Sidebar({ active }) {
           >
             <IoMdNotificationsOutline
               className={`${
-                active == "notification"
+                active === "notification"
                   ? "text-2xl xl:text-4xl  text-primary"
                   : "text-2xl xl:text-4xl text-white"
               }`}

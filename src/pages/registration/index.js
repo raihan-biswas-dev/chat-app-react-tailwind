@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ColorRing } from "react-loader-spinner";
+import { ToastContainer, toast } from "react-toastify";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -73,7 +74,8 @@ function Registration() {
       }
     }
 
-    let passRegx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    // let passRegx = /^(?=.*\d)(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*[A-Z]).{6,20}$/;
+    let passRegx = /^^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
     let emailRegx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (
       email &&
@@ -93,11 +95,13 @@ function Registration() {
               console.log(user);
               sendEmailVerification(auth.currentUser).then(() => {
                 setLoading(false);
-                setSuccess("Registration Successful, please verify your email");
+                toast.success(
+                  "Registration Successful, please verify your email"
+                );
               });
               setTimeout(() => {
                 navigate("/login");
-              }, 5000);
+              }, 2000);
             })
             .catch((error) => {
               console.log(error);
@@ -120,6 +124,7 @@ function Registration() {
 
   return (
     <div className="flex flex-col md:flex-row h-screen sml:flex-row md:px-0 px-2.5 sml:px-0">
+      <ToastContainer position="top-left" theme="dark" />
       <div className="sml:w-1/2  md:w-1/2 flex flex-col md:items-center sml:items-end md:pr-0 sml:pr-[69px]  justify-center md:order-1 order-2 sml:order-1">
         <div className=" md:w-[75%] sml:w-[497px]">
           <h2 className="font-bold mt-4 sml:mt-0 text-[23px] md:text-[32px] sml:text-[34px] text-nun text-primary">
@@ -147,11 +152,11 @@ function Registration() {
                 {emailErr}
               </p>
             )}
-            {success && (
+            {/* {success && (
               <p className="text-nun font-semibold text-3.5 text-[green]">
                 {success}
               </p>
-            )}
+            )} */}
           </div>
           <div className="relative">
             <input

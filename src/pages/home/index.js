@@ -11,9 +11,9 @@ import BlockedUser from "./../../components/BlockedUser";
 function Home() {
   return (
     <div className="max-w-full w-full">
-      <div className="xl:flex justify-between p-2.5 xl:p-0">
-        <div className="xl:w-[186px] xl:block">
-          <Sidebar active="home" />
+      <div className="xl:flex justify-between p-2.5 xl:p-0 rela">
+        <div className="xl:w-[186px] xl:block ">
+          <Sidebar active="home" className="" />
         </div>
         <div className="xl:w-[427px]">
           <Search />

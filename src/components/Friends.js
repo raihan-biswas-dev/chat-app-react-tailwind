@@ -51,7 +51,7 @@ function Friends() {
           </p>
         </div>
       </div>
-      <div className="flex justify-around items-center border-b border-solid border-pribary pt-2 pb-2.5">
+      <div className="flex justify-around items-center border-b border-solid border-pribary pt-2 pb-2.5 last:border-0">
         <img
           src="images/friend-1.png"
           alt=""
