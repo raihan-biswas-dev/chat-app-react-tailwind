@@ -1,21 +1,40 @@
 import React from "react";
+import { getAuth, signOut } from "firebase/auth";
 import { AiOutlineHome, AiOutlineMessage } from "react-icons/ai";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { FiSettings } from "react-icons/fi";
 import { BiExit } from "react-icons/bi";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function Sidebar({ active }) {
+  const auth = getAuth();
+  let navigate = useNavigate();
+
+  let handleSignOut = () => {
+    signOut(auth).then(() => {
+      toast.success("Sign Out  Successful");
+      setTimeout(() => {
+        navigate("/register");
+      }, 2000);
+    });
+  };
+
   return (
     <div className="w-full flex xl:flex-col justify-center mdl:w-full xl:justify-start items-center bg-[#414D62] xl:bg-primary xl:h-full px-10 xl:py-8 fixed bottom-0 xl:static z-10">
+      <ToastContainer position="top-left" theme="dark" />
       <div className="flex xl:flex-col items-center  xl:items-start p-2.5 xl:p-0">
         <picture>
           <img
-            src="images/profile-1.png"
+            src={auth.currentUser.photoURL}
             alt="profile-1"
             loading="lazy"
             className="h-[40px] w-[40px] xl:h-[100px] xl:w-[100px] rounded"
           />
         </picture>
+        <h6 className="text-center text-sm font-pop font-normal text-white">
+          {auth.currentUser.displayName}
+        </h6>
         <div className="flex xl:flex-col items-center xl:pt-8 xl:gap-y-10 gap-x-4 xl:gap-x-1 ">
           <div
             className={`${
@@ -81,6 +100,7 @@ function Sidebar({ active }) {
             }`}
           >
             <BiExit
+              onClick={handleSignOut}
               className={`${
                 active == "exit"
                   ? "text-2xl xl:text-4xl text-primary"

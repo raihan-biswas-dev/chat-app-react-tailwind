@@ -6,7 +6,6 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
   updateProfile,
-  signInWithPopup,
 } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
@@ -102,7 +101,7 @@ function Registration() {
               });
               setTimeout(() => {
                 navigate("/login");
-              }, 2000);
+              }, 3000);
             })
             .catch((error) => {
               console.log(error);
