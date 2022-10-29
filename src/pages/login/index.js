@@ -98,8 +98,9 @@ function Login() {
   };
 
   let handleFacebookLogin = () => {
-    signInWithPopup(auth, Fbprovider).then(() => {
+    signInWithPopup(auth, Fbprovider).then((item) => {
       navigate("/");
+      console.log(item);
     });
   };
 

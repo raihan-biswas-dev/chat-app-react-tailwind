@@ -29,9 +29,10 @@ function Sidebar({ active }) {
             src={auth.currentUser.photoURL}
             alt="profile-1"
             loading="lazy"
-            className="h-[40px] w-[40px] xl:h-[100px] xl:w-[100px] rounded"
+            className="h-[40px] w-[40px] xl:h-[100px] xl:w-[100px] rounded-full"
           />
         </picture>
+
         <h6 className="text-center text-sm font-pop font-normal text-white">
           {auth.currentUser.displayName}
         </h6>
