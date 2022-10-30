@@ -7,11 +7,15 @@ import {
   sendEmailVerification,
   updateProfile,
 } from "firebase/auth";
+
+import { getDatabase, ref, set } from "firebase/database";
+
 import { Link, useNavigate } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 function Registration() {
   const auth = getAuth();
+  const db = getDatabase();
   let navigate = useNavigate();
 
   let [email, setEmail] = useState("");
@@ -93,15 +97,24 @@ function Registration() {
           })
             .then(() => {
               console.log(user);
-              sendEmailVerification(auth.currentUser).then(() => {
-                setLoading(false);
-                toast.success(
-                  "Registration Successful, please verify your email"
-                );
-              });
-              setTimeout(() => {
-                navigate("/login");
-              }, 3000);
+              sendEmailVerification(auth.currentUser)
+                .then(() => {
+                  setLoading(false);
+                  toast.success(
+                    "Registration Successful, please verify your email"
+                  );
+                })
+                .then(() => {
+                  set(ref(db, "users/" + user.user.uid), {
+                    name: user.user.displayName,
+                    email: user.user.email,
+                    photoURL: user.user.photoURL,
+                  }).then(() => {
+                    setTimeout(() => {
+                      navigate("/login");
+                    }, 3000);
+                  });
+                });
             })
             .catch((error) => {
               console.log(error);
