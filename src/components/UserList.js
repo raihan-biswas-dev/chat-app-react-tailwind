@@ -20,10 +20,10 @@ function UserList() {
       });
       setUserList(arr);
     });
-  }, [db]);
+  }, [db, auth.currentUser.uid]);
 
-  let handleFrReSent = () => {
-    
+  let handleFrReSent = (item) => {
+    console.log(item);
   };
 
   return (
@@ -47,7 +47,7 @@ function UserList() {
           </div>
           <div>
             <button
-              onClick={handleFrReSent}
+              onClick={() => handleFrReSent(item)}
               className="text-white bg-primary py-2.5 px-5 rounded font-pop font-semibold text-sm capitalize"
             >
               <AiOutlineUserAdd />

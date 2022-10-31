@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { getAuth, signOut, updateProfile } from "firebase/auth";
+import { ColorRing } from "react-loader-spinner";
 
 import Cropper from "react-cropper";
 import {
@@ -31,6 +32,7 @@ function Sidebar({ active }) {
   let [previewImg, setPreviewImg] = useState("");
   let [imgName, setImgName] = useState("");
   const [cropper, setCropper] = useState();
+  let [loading, setLoading] = useState(false);
 
   // React img cropper
   const cropperRef = useRef(null);
@@ -51,6 +53,8 @@ function Sidebar({ active }) {
 
   let handleProfileUpload = () => {
     setShowImgPopUp(!showImgPopUp);
+    setImgName("");
+    setPreviewImg("");
   };
 
   let handleClosePopUp = () => {
@@ -74,9 +78,8 @@ function Sidebar({ active }) {
     reader.readAsDataURL(files[0]);
   };
 
-  // ===============upload image
-
   const getCropData = (e) => {
+    setLoading(true);
     const storageRef = ref(storage, imgName);
     if (typeof cropper !== "undefined") {
       cropper.getCroppedCanvas().toDataURL();
@@ -88,7 +91,8 @@ function Sidebar({ active }) {
             photoURL: downloadURL,
           })
             .then(() => {
-              console.log("profile updated");
+              setLoading(false);
+              setShowImgPopUp(false);
             })
             .catch((error) => {
               console.log(error);
@@ -121,7 +125,7 @@ function Sidebar({ active }) {
           </div>
         </div>
 
-        <h6 className="text-center text-sm font-pop font-normal text-white">
+        <h6 className="text-center w-full mt-2 text-sm font-pop font-normal text-white">
           {auth.currentUser.displayName}
         </h6>
         <div className="flex xl:flex-col items-center xl:pt-8 xl:gap-y-10 gap-x-4 xl:gap-x-1 ">
@@ -244,13 +248,34 @@ function Sidebar({ active }) {
                 setCropper(instance);
               }}
             />
-            <button
-              className="rounded-full w-[70%] 
+
+            {loading ? (
+              <div className="flex justify-center items-center">
+                <ColorRing
+                  visible={true}
+                  height="80"
+                  width="80"
+                  ariaLabel="blocks-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="blocks-wrapper"
+                  colors={[
+                    "#e15b64",
+                    "#f47e60",
+                    "#f8b26a",
+                    "#abbd81",
+                    "#849b87",
+                  ]}
+                />
+              </div>
+            ) : (
+              <button
+                className="rounded-full w-[70%] 
           text-center bg-primary py-2 md:px-4 text-white font-nun font-normal text-base mt-8"
-              onClick={getCropData}
-            >
-              Upload
-            </button>
+                onClick={getCropData}
+              >
+                Upload
+              </button>
+            )}
           </div>
         </div>
       )}

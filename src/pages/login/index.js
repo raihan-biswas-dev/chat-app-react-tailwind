@@ -14,7 +14,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookSquare } from "react-icons/fa";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-import ForgotPassword from "./../forgotPassword/index";
 
 function Login() {
   const auth = getAuth();
