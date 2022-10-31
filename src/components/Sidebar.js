@@ -1,6 +1,13 @@
 import React, { useState, useRef } from "react";
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signOut, updateProfile } from "firebase/auth";
+
 import Cropper from "react-cropper";
+import {
+  getStorage,
+  ref,
+  uploadString,
+  getDownloadURL,
+} from "firebase/storage";
 import "cropperjs/dist/cropper.css";
 import {
   AiOutlineHome,
@@ -17,10 +24,13 @@ import { useNavigate } from "react-router-dom";
 function Sidebar({ active }) {
   const auth = getAuth();
   let navigate = useNavigate();
+  const storage = getStorage();
 
   let [showImgPopUp, setShowImgPopUp] = useState(false);
   const [image, setImage] = useState("");
   let [previewImg, setPreviewImg] = useState("");
+  let [imgName, setImgName] = useState("");
+  const [cropper, setCropper] = useState();
 
   // React img cropper
   const cropperRef = useRef(null);
@@ -41,7 +51,6 @@ function Sidebar({ active }) {
 
   let handleProfileUpload = () => {
     setShowImgPopUp(!showImgPopUp);
-    previewImg("");
   };
 
   let handleClosePopUp = () => {
@@ -49,7 +58,7 @@ function Sidebar({ active }) {
   };
 
   let handleSelectImg = (e) => {
-    // console.log(e.target.files[0].name);
+    setImgName(e.target.files[0].name);
 
     let files;
     if (e.dataTransfer) {
@@ -65,7 +74,29 @@ function Sidebar({ active }) {
     reader.readAsDataURL(files[0]);
   };
 
-  // ===============upload image pop up
+  // ===============upload image
+
+  const getCropData = (e) => {
+    const storageRef = ref(storage, imgName);
+    if (typeof cropper !== "undefined") {
+      cropper.getCroppedCanvas().toDataURL();
+      // console.log(previewImg);
+      const message4 = cropper.getCroppedCanvas().toDataURL();
+      uploadString(storageRef, message4, "data_url").then((snapshot) => {
+        getDownloadURL(storageRef).then((downloadURL) => {
+          updateProfile(auth.currentUser, {
+            photoURL: downloadURL,
+          })
+            .then(() => {
+              console.log("profile updated");
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        });
+      });
+    }
+  };
 
   return (
     <div className="w-full flex xl:flex-col justify-center mdl:w-full xl:justify-start items-center bg-[#414D62] xl:bg-primary xl:h-full px-10 xl:py-8 fixed bottom-0 xl:static z-10">
@@ -209,10 +240,14 @@ function Sidebar({ active }) {
               guides={false}
               crop={onCrop}
               ref={cropperRef}
+              onInitialized={(instance) => {
+                setCropper(instance);
+              }}
             />
             <button
               className="rounded-full w-[70%] 
           text-center bg-primary py-2 md:px-4 text-white font-nun font-normal text-base mt-8"
+              onClick={getCropData}
             >
               Upload
             </button>
