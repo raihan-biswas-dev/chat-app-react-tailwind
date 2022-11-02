@@ -188,7 +188,7 @@ function Login() {
           </div>
           <div className="relative">
             <input
-              className="border-b border-solid border-black w-full	py-4	md:py-6 mt-8 outline-0"
+              className="border-b border-solid border-black w-full	py-1	md:py-6 mt-8 outline-0"
               type={show ? "text" : "password"}
               onChange={handlePassword}
             />
@@ -266,7 +266,7 @@ function Login() {
             <h1 className="text-primary font-bold text-2xl">Forgot Password</h1>
             <div className="relative">
               <input
-                className="border border-solid border-black w-full rounded-lg font-normal	px-[38px] py-2	sml:py-6 mt-8 outline-0"
+                className="border border-solid border-black w-full rounded-lg font-normal	px-[38px] py-1	sml:py-6 mt-8 outline-0"
                 type="email"
                 placeholder="Enter your mail"
                 onChange={(e) => setShowForgotPass(e.target.value)}

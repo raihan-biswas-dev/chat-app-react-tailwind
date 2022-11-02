@@ -4,7 +4,7 @@ function BlockedUser() {
   return (
     <div className="shadow-sm drop-shadow-md rounded-md shadow-[#1b2a443b] p-2.5 mt-11 h-[427px] overflow-y-scroll">
       <h3 className="font-pop font-semibold	 text-xl text-primary mb-4">
-        Blocked User
+        Blocked List
       </h3>
       <div className="flex justify-around items-center border-b border-solid border-pribary pt-2 pb-2.5">
         <img
