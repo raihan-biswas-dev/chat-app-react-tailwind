@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { getDatabase, ref, onValue, set, push } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { AiOutlineUserAdd } from "react-icons/ai";
-import { FaUserCheck } from "react-icons/fa";
+import { FaUserCheck, FaUserFriends } from "react-icons/fa";
 
 function UserList() {
   const db = getDatabase();
   const auth = getAuth();
   const [userList, setUserList] = useState([]);
   let [friend, setFriend] = useState([]);
+  let [friendList, setFriendList] = useState([]);
 
   useEffect(() => {
     const userRef = ref(db, "users/");
@@ -43,6 +44,17 @@ function UserList() {
       setFriend(friendArr);
     });
   }, [db]);
+  // =======================================================
+  useEffect(() => {
+    const friendRef = ref(db, "friends");
+    onValue(friendRef, (snapshot) => {
+      let friendArr = [];
+      snapshot.forEach((item) => {
+        friendArr.push(item.val().receiverid + item.val().senderid);
+      });
+      setFriendList(friendArr);
+    });
+  }, [db]);
 
   return (
     <div className="shadow-sm drop-shadow-md rounded-md shadow-[#1b2a443b] p-2.5 mt-11 h-[451px] overflow-y-scroll">
@@ -64,8 +76,13 @@ function UserList() {
             <p className="font-pop font-normal text-sm text-para">Engineer</p>
           </div>
           <div>
-            {friend.includes(item.id + auth.currentUser.uid) ||
-            friend.includes(auth.currentUser.uid + item.id) ? (
+            {friendList.includes(item.id + auth.currentUser.uid) ||
+            friendList.includes(auth.currentUser.uid + item.id) ? (
+              <button className="text-white bg-primary py-2.5 px-5 rounded font-pop font-semibold text-sm capitalize">
+                <FaUserFriends />
+              </button>
+            ) : friend.includes(item.id + auth.currentUser.uid) ||
+              friend.includes(auth.currentUser.uid + item.id) ? (
               <button className="text-white bg-primary py-2.5 px-5 rounded font-pop font-semibold text-sm capitalize">
                 <FaUserCheck />
               </button>

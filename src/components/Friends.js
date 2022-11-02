@@ -14,7 +14,12 @@ function Friends() {
       let friendsReqArr = [];
 
       snapshot.forEach((item) => {
-        friendsReqArr.push(item.val());
+        if (
+          auth.currentUser.uid === item.val().receiverid ||
+          auth.currentUser.uid === item.val().senderid
+        ) {
+          friendsReqArr.push({ ...item.val(), key: item.key });
+        }
       });
       setFriends(friendsReqArr);
     });
@@ -35,7 +40,11 @@ function Friends() {
           />
           <div className="">
             <h3 className="font-pop font-semibold text-lg text-primary">
-              {item.sendername}
+              {auth.currentUser.uid === item.senderid ? (
+                <h4>{item.receivername} </h4>
+              ) : (
+                <h4>{item.sendername} </h4>
+              )}
             </h3>
             <p className="font-pop font-normal text-sm text-para">
               Full Stack Engineer!
