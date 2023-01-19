@@ -26,7 +26,7 @@ function Group() {
           </button>
         </div>
       </div>
-      <div className="flex justify-around items-center border-b border-solid border-pribary pt-2 pb-2.5">
+      <div className="flex justify-around items-center border-b border-solid border-pribary pt-2 pb-2.5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 duration-300">
         <img
           src="images/group-1.png"
           alt=""
@@ -46,7 +46,7 @@ function Group() {
           </button>
         </div>
       </div>
-      <div className="flex justify-around items-center border-b border-solid border-pribary pt-2 pb-2.5 last:border-0">
+      <div className="flex justify-around items-center border-b border-solid border-pribary pt-2 pb-2.5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 duration-300">
         <img
           src="images/group-1.png"
           alt=""
@@ -66,7 +66,7 @@ function Group() {
           </button>
         </div>
       </div>
-      <div className="flex justify-around items-center border-b border-solid border-pribary pt-2 pb-2.5 last:border-0">
+      <div className="flex justify-around items-center border-b border-solid border-pribary pt-2 pb-2.5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 duration-300 last:border-0">
         <img
           src="images/group-1.png"
           alt=""

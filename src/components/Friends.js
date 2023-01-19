@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getDatabase, ref, onValue, set, push } from "firebase/database";
-import { getAuth } from "firebase/auth";
+import { getAuth, SAMLAuthProvider } from "firebase/auth";
 
 function Friends() {
   const db = getDatabase();
@@ -25,6 +25,23 @@ function Friends() {
     });
   }, [db, auth.currentUser.uid]);
 
+  let handleBlock = (item) => {
+    console.log(item);
+    auth.currentUser.uid === item.senderid
+      ? set(push(ref(db, "blockusers")), {
+          block: item.receivername,
+          blockid: item.receiverid,
+          blockby: item.sendername,
+          blockbyid: item.senderid,
+        })
+      : set(push(ref(db, "blockusers")), {
+          block: item.sendername,
+          blockid: item.senderid,
+          blockby: item.receivername,
+          blockbyid: item.receiverid,
+        });
+  };
+
   return (
     <div className="shadow-sm drop-shadow-md rounded-md shadow-[#1b2a443b] p-2.5 mt-11 h-[451px] overflow-y-scroll">
       <h3 className="font-pop font-semibold	 text-xl text-primary mb-4">
@@ -38,7 +55,7 @@ function Friends() {
             alt=""
             className="w-[70px] h-[70px] rounded"
           />
-          <div className="">
+          <div className="ml-4 xl:ml-0">
             <h3 className="font-pop font-semibold text-lg text-primary">
               {auth.currentUser.uid === item.senderid ? (
                 <h4>{item.receivername} </h4>
@@ -49,6 +66,14 @@ function Friends() {
             <p className="font-pop font-normal text-sm text-para">
               Full Stack Engineer!
             </p>
+          </div>
+          <div>
+            <button
+              onClick={() => handleBlock(item)}
+              className="text-white bg-primary py-2.5 px-5 rounded font-pop font-semibold text-sm capitalize"
+            >
+              block
+            </button>
           </div>
         </div>
       ))}

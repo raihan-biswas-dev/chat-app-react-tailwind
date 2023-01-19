@@ -43,7 +43,7 @@ function FriendReq() {
   };
 
   return (
-    <div className="shadow-sm drop-shadow-md rounded-md shadow-[#1b2a443b] p-2.5 mt-11 h-[427px] overflow-y-scroll">
+    <div className="shadow-sm drop-shadow-md rounded-md shadow-[#1b2a443b] p-2.5 mt-[25px] h-[427px] overflow-y-scroll">
       <h3 className="font-pop font-semibold	 text-xl text-primary mb-4">
         Friend Request
       </h3>
@@ -55,7 +55,7 @@ function FriendReq() {
             alt=""
             className="w-[70px] h-[70px] rounded"
           />
-          <div className="">
+          <div className="ml-4 xl:ml-0">
             <h3 className="font-pop font-semibold text-lg text-primary">
               {item.sendername}
             </h3>
@@ -64,12 +64,11 @@ function FriendReq() {
             </p>
           </div>
           <div>
-            <button
-              onClick={() => handleAcceptFriendReq(item)}
-              className="text-white bg-primary py-2.5 px-5 rounded font-pop font-semibold text-sm capitalize"
-            >
-              accept
-            </button>
+            <div>
+              <button className="text-white bg-primary py-2.5 px-5 rounded font-pop font-semibold text-sm capitalize">
+                join
+              </button>
+            </div>
           </div>
         </div>
       ))}

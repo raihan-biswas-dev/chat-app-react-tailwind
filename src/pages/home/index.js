@@ -33,19 +33,19 @@ function Home() {
       {verify ? (
         <div className="max-w-full w-full">
           <div className="xl:flex justify-between p-2.5 xl:p-0 rela">
-            <div className="xl:w-[186px] xl:block ">
+            <div className="xl:w-[15%] xl:block ">
               <Sidebar active="home" className="" />
             </div>
-            <div className="xl:w-[427px]">
+            <div className="xl:w-[30%]">
               <Search />
               <Group />
               <FriendReq />
             </div>
-            <div className="xl:w-[344px]">
+            <div className="xl:w-[30%]">
               <Friends />
               <MyGroups />
             </div>
-            <div className="xl:w-[344px]">
+            <div className="xl:w-[25%]">
               <UserList />
               <BlockedUser />
             </div>
