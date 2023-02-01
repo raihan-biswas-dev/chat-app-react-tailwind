@@ -7,67 +7,7 @@ function MyGroups() {
         My Groups
       </h3>
 
-      <div className="flex justify-around items-center border-b border-solid border-pribary pt-2 pb-2.5">
-        <img
-          src="images/friend-1.png"
-          alt=""
-          className="w-[70px] h-[70px] rounded"
-        />
-        <div className="">
-          <h3 className="font-pop font-semibold text-lg text-primary">
-            Raihan Biswas
-          </h3>
-          <p className="font-pop font-normal text-sm text-para">
-            Full Stack Engineer!
-          </p>
-        </div>
-      </div>
-      <div className="flex justify-around items-center border-b border-solid border-pribary pt-2 pb-2.5">
-        <img
-          src="images/friend-1.png"
-          alt=""
-          className="w-[70px] h-[70px] rounded"
-        />
-        <div className="">
-          <h3 className="font-pop font-semibold text-lg text-primary">
-            Raihan Biswas
-          </h3>
-          <p className="font-pop font-normal text-sm text-para">
-            Full Stack Engineer!
-          </p>
-        </div>
-      </div>
-      <div className="flex justify-around items-center border-b border-solid border-pribary pt-2 pb-2.5">
-        <img
-          src="images/friend-1.png"
-          alt=""
-          className="w-[70px] h-[70px] rounded"
-        />
-        <div className="">
-          <h3 className="font-pop font-semibold text-lg text-primary">
-            Raihan Biswas
-          </h3>
-          <p className="font-pop font-normal text-sm text-para">
-            Full Stack Engineer!
-          </p>
-        </div>
-      </div>
-      <div className="flex justify-around items-center border-b border-solid border-pribary pt-2 pb-2.5">
-        <img
-          src="images/friend-1.png"
-          alt=""
-          className="w-[70px] h-[70px] rounded"
-        />
-        <div className="">
-          <h3 className="font-pop font-semibold text-lg text-primary">
-            Raihan Biswas
-          </h3>
-          <p className="font-pop font-normal text-sm text-para">
-            Full Stack Engineer!
-          </p>
-        </div>
-      </div>
-      <div className="flex justify-around items-center border-b border-solid border-pribary pt-2 pb-2.5 last:border-0">
+      <div className="flex justify-around items-center border-b border-solid border-pribary pt-2 pb-2.5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 duration-300">
         <img
           src="images/friend-1.png"
           alt=""

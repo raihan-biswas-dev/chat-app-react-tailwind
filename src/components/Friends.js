@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { getDatabase, ref, onValue, set, push } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  onValue,
+  set,
+  push,
+  remove,
+} from "firebase/database";
 import { getAuth, SAMLAuthProvider } from "firebase/auth";
 
 function Friends() {
@@ -33,12 +40,16 @@ function Friends() {
           blockid: item.receiverid,
           blockby: item.sendername,
           blockbyid: item.senderid,
+        }).then(() => {
+          remove(ref(db, "friends/" + item.key));
         })
       : set(push(ref(db, "blockusers")), {
           block: item.sendername,
           blockid: item.senderid,
           blockby: item.receivername,
           blockbyid: item.receiverid,
+        }).then(() => {
+          remove(ref(db, "friends/" + item.key));
         });
   };
 

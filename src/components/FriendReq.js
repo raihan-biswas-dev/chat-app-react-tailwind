@@ -65,8 +65,11 @@ function FriendReq() {
           </div>
           <div>
             <div>
-              <button className="text-white bg-primary py-2.5 px-5 rounded font-pop font-semibold text-sm capitalize">
-                join
+              <button
+                onClick={() => handleAcceptFriendReq(item)}
+                className="text-white bg-primary py-2.5 px-5 rounded font-pop font-semibold text-sm capitalize"
+              >
+                accept
               </button>
             </div>
           </div>
